@@ -1,0 +1,9 @@
+.region-label {
+  color: black;
+  margin-right: 5px;
+}
+
+.region-label-highlight {
+  color: #1975D2;
+  margin-right: 5px;
+}
