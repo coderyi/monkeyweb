@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import PageHeader from '../components/PageHeader'
 import RepositoryList from '../components/RepositoryList'
 import {IRepository} from '../models/Interfaces'
-
+import { MonkeyGitHubAPI } from '../monkey-github-api/MonkeyGitHubAPI'
 var itemArray: Array<IRepository> = []
 var currentLanguage: string = ''
 const RepositoryPage: React.FC = () => {
@@ -31,22 +31,13 @@ const RepositoryPage: React.FC = () => {
             itemArray = []
         }
         currentLanguage = language
-        const response = await fetch('https://api.github.com/search/repositories?sort=stars&order=desc&page='+page+'&q=language:'+language)
-        const myJson = await response.json();
+        const client = new MonkeyGitHubAPI();
+        list = await client.searchRepositories(start, page, language)
         let i:number;
-        for (i = 0; i < myJson.items.length; i++) {
-            var item = myJson.items[i]
-            let newItem: IRepository = {
-                title: item.full_name,
-                avatarUrl: item.owner.avatar_url,
-                index: i + start,
-                description: item.description,
-                created_at: item.created_at,
-                stargazers_count: item.stargazers_count,
-                forks_count: item.forks_count
-            }
-            list[i] = newItem
-          }
+        for (i = 0; i < list.length; i++) {
+            var item = list[i]
+            item.index = i + start
+        } 
         itemArray = itemArray.concat(list);
         return itemArray
     }

@@ -24,7 +24,7 @@ const UserList: React.FC<UserListProps> = ({items, onSelect}) => {
                 >
                     <label className='cell-label'>
                         <span className='cell-index'>{item.index}</span>
-                        <img className='cell-img' src={item.avatarUrl}>
+                        <img className='cell-img' src={item.avatar_url}>
                         </img>
                         <span className='cell-name'>{item.title}</span>
                     </label>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import PageHeader from '../components/PageHeader'
 import UserList from '../components/UserList'
 import {IUser} from '../models/Interfaces'
-
+import { MonkeyGitHubAPI } from '../monkey-github-api/MonkeyGitHubAPI'
 var itemArray: Array<IUser> = []
 var currentRegion: string = 'world'
 var currentLocation: string = ''
@@ -21,6 +21,7 @@ const UserRankPage: React.FC = () => {
     }, [])
 
     const fetchDataHandler = async () => {
+        const client = new MonkeyGitHubAPI();
         localStorage.setItem('fetchData', 'user')
         var list: IUser[] = [];
         var start = itemArray.length + 1;
@@ -41,24 +42,19 @@ const UserRankPage: React.FC = () => {
             page = 1
             itemArray = []
         }
-        let url = 'https://api.github.com/search/users?q=location:'+location+'+language:'+language+'&sort=followers&order=desc&page='+page
-        if (selectedRegion == 'world') {
-            url = 'https://api.github.com/search/users?q=language:'+language+'&sort=followers&order=desc&page='+page
-        }
         currentLocation = location
         currentLanguage = language
-        const response = await fetch(url)
-        const myJson = await response.json();
+        list = await client.searchUsers(
+            start,
+            page,
+            location,
+            language
+        )
         let i:number;
-        for (i = 0; i < myJson.items.length; i++) {
-            var item = myJson.items[i]
-            let newItem: IUser = {
-                title: item.login,
-                avatarUrl: item.avatar_url,
-                index: i + start
-            }
-            list[i] = newItem
-          }
+        for (i = 0; i < list.length; i++) {
+            var item = list[i]
+            item.index = i + start
+        } 
         itemArray = itemArray.concat(list);
         return itemArray
     }

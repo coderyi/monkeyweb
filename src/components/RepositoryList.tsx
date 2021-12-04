@@ -24,7 +24,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({items, onSelect}) => {
                 >
                     <label>
                         <span>{item.index}</span>
-                        <img className='cell-img' src={item.avatarUrl}>
+                        <img className='cell-img' src={item.avatar_url}>
                         </img>
                         <span className='repository-span'>{item.title}</span>
                         <span className='repository-span'>{`star:${item.stargazers_count}`}</span>
