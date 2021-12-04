@@ -45,7 +45,6 @@ const UserRankPage: React.FC = () => {
         currentLocation = location
         currentLanguage = language
         list = await client.searchUsers(
-            start,
             page,
             location,
             language

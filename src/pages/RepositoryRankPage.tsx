@@ -33,7 +33,7 @@ const RepositoryPage: React.FC = () => {
         }
         currentLanguage = language
         const client = new MonkeyGitHubAPI();
-        list = await client.searchRepositories(start, page, language)
+        list = await client.searchRepositories(page, language)
         let i:number;
         for (i = 0; i < list.length; i++) {
             var item = list[i]
