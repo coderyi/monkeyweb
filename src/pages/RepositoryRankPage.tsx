@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react'
 import PageHeader from '../components/PageHeader'
 import RepositoryList from '../components/RepositoryList'
 import {IRepository} from '../models/Interfaces'
-import { MonkeyGitHubAPI } from '../monkey-github-api/MonkeyGitHubAPI'
+import { MonkeyGitHubAPI } from 'monkey-github-api'
+
 var itemArray: Array<IRepository> = []
 var currentLanguage: string = ''
 const RepositoryPage: React.FC = () => {

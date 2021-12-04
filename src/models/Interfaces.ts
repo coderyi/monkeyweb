@@ -1,4 +1,4 @@
-import { IMonkeyGitHubUser, IMonkeyGitHubRepository } from "../monkey-github-api/MonkeyGitHubInterfaces";
+import { IMonkeyGitHubUser, IMonkeyGitHubRepository } from 'monkey-github-api'
 export interface IUser extends IMonkeyGitHubUser {
     index?: number
 }

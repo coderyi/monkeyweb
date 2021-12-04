@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import PageHeader from '../components/PageHeader'
 import UserList from '../components/UserList'
 import {IUser} from '../models/Interfaces'
-import { MonkeyGitHubAPI } from '../monkey-github-api/MonkeyGitHubAPI'
+import { MonkeyGitHubAPI } from 'monkey-github-api'
 var itemArray: Array<IUser> = []
 var currentRegion: string = 'world'
 var currentLocation: string = ''
